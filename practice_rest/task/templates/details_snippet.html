@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{%block title%}{{list_it.name}}{%endblock%}
+
+{% block content %}
+{%if user.is_authenticated%}
+<h2>{{list_it.name}}</h2>
+
+Created-at:<small>{{list_it.created}}</small><br/>
+    Due-Date: <small>{{list_it.due_date}}</small>
+<hr>
+<img src="{{list_it.snippet_image.url}}" style='float:left; width:30%; padding:20px;'/>
+<p style='margin-left:3em;'>
+{{list_it.details}}
+</p>
+{%endif%}
+{%endblock%}

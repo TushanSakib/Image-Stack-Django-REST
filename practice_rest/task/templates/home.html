@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+{% if user.is_authenticated %}
+    <h3 class="text-center"><i>List Of Story Details</i></h3>
+    <br/>
+    {% for li in object_list %}
+    <div class="row row-cols-3">
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+        {% if li.snippet_image %}
+        <img src="{{li.snippet_image.url}}" class="card-img-top">
+        {% endif %}
+        <a class="dropdown-item" href ="{% url 'details_snippet' li.id %}">
+        <div class="card-body">
+          <h5 class="card-title">{{li.name}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{li.created}}</h6>
+          <p class="card-text">{{li.details|slice:":30"|safe}}..</p>
+        </div>
+    </a>
+        <div class="card-body">
+          <a href="{% url 'update_snippet' li.id %}" class="card-link">Edit</a>
+          <a href="{% url 'delete_snippet' li.id %}" class="card-link">Delete</a>
+        </div>
+      </div>
+    </div>
+</div>
+      <br/>
+      <br/>
+      {% endfor %}
+      {% endif %}
+{%endblock%}
